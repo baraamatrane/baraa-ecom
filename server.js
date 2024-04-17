@@ -6,7 +6,7 @@ const BrandRouter = require("./Routers/BrandRoute");
 const Productroute = require("./Routers/ProductRoute");
 const db = require("./mongodb");
 const geoip = require("geoip-lite");
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 const cors = require("cors");
 const helmet = require("helmet");
 const hpp = require("hpp");
@@ -20,9 +20,9 @@ const ReviewRoute = require("./Routers/ReviewsRoute");
 const OrderRoute = require("./Routers/OrderRoute");
 const server = require("http").createServer(app);
 const SubCategotyRoute = require("./Routers/SubCategoryRoute");
-// app.use(
-//   bodyParser.urlencoded({ extended: true, parameterLimit: 5, limit: "1MB" })
-// );
+app.use(
+  bodyParser.urlencoded({ extended: true, parameterLimit: 5, limit: "1MB" })
+);
 app.use(
   cors({
     origin: "http://localhost:3000", // Replace with your frontend origin
@@ -32,15 +32,15 @@ app.use(
 app.use(helmet());
 app.use(mongoSanatize());
 
-// app.use(
-//   rate.rateLimit({
-//     windowMs: 60 * 60 * 1000,
-//     limit: 20,
-//     message: {
-//       message: "Too many request from this IP, please try again after an hour",
-//     },
-//   })
-// );
+app.use(
+  rate.rateLimit({
+    windowMs: 60 * 60 * 1000,
+    limit: 100,
+    message: {
+      message: "Too many request from this IP, please try again after an hour",
+    },
+  })
+);
 app.use(cookieParser());
 // Then apply csurf middleware
 // const csrfProtection = csrf({ cookie: true });
