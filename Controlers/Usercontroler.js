@@ -160,10 +160,9 @@ const Usercontroler = {
       if (!Comparepassword) {
         return res.status(400).json({ message: "Password incorrect " });
       }
-
       const token = jwt.sign(
         { Userinfo: existuser._id, Role: existuser.Role },
-        env.parsed.ACCESS_TOKEN_SECRET,
+        process.env.ACCESS_TOKEN_SECRET,
         {
           expiresIn: "24h",
         }
