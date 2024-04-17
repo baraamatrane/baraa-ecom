@@ -1,4 +1,4 @@
-const Brand = require("../Schemas/Brandschema.js");
+const Brand = require("../Schemas/BrandSchema");
 const async_handler = require("express-async-handler");
 const cleanupUploadedImages = require("../validation/Multer").createMulter(
   "Brand"
