@@ -35,7 +35,7 @@ app.use(mongoSanatize());
 app.use(
   rate.rateLimit({
     windowMs: 60 * 60 * 1000,
-    limit: 100,
+    limit: 10000,
     message: {
       message: "Too many request from this IP, please try again after an hour",
     },
