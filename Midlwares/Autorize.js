@@ -4,7 +4,7 @@ const Order = require("../Schemas/Ordreschema");
 const { v4: uuidv4 } = require("uuid");
 const expressAsyncHandler = require("express-async-handler");
 const Cart = require("../Schemas/CartItemSchema");
-const env = require("dotenv").config().parsed.ACCESS_TOKEN_SECRET;
+const env = process.env.ACCESS_TOKEN_SECRET;
 const Middleware = {
   // ValidateCsrf:expressAsyncHandler(async (req, res, next) => {
   //   try {

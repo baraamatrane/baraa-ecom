@@ -2,7 +2,6 @@ const DB = require("../Schemas/Userschema");
 const jwt = require("jsonwebtoken");
 const async_handler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
-const env = require("dotenv").config();
 const Usercontroler = {
   Register: async_handler(async (req, res, next) => {
     try {
@@ -30,7 +29,7 @@ const Usercontroler = {
       });
       const token = jwt.sign(
         { Userinfo: Createuser._id, UpdateRole },
-        env.parsed.ACCESS_TOKEN_SECRET,
+        process.env.ACCESS_TOKEN_SECRET,
         {
           expiresIn: "24h",
         }
@@ -249,7 +248,7 @@ const Usercontroler = {
         return res.status(401).json({ message: "Unauthorized" });
       jwt.verify(
         cookie.token,
-        env.parsed.ACCESS_TOKEN_SECRET,
+        process.env.ACCESS_TOKEN_SECRET,
         async (err, decodded) => {
           if (err)
             return res
@@ -259,7 +258,7 @@ const Usercontroler = {
           if (user) {
             const token = jwt.sign(
               { userInfo: user._id },
-              env.parsed.ACCESS_TOKEN_SECRET,
+              process.env.ACCESS_TOKEN_SECRET,
               { expiresIn: "24h" }
             );
             return res.status(201).json({ token });
