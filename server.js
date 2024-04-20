@@ -25,7 +25,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: "http://localhost:3000", // Replace with your frontend origin
+    origin: "https://next-js-tailwind-css-ecommerce-web-app-seven.vercel.app", // Replace with your frontend origin
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
   })
 );
